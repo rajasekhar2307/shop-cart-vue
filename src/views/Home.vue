@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Banner />
+    <Recommended
+      @addToCart="addToCart"
+      :products="products.slice(0,3)"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Banner from '../components/Banner.vue'
+import Recommended from '../components/Recommended.vue'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    Banner,
+    Recommended
+  },
+  props: ['products'],
+  methods: {
+    addToCart(productId, quantity) {
+      this.$emit('addToCart',productId, quantity);
+    }
   }
 }
 </script>
